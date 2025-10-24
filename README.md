@@ -63,7 +63,33 @@ TinyEditor::make('content')
     ->columnSpanFull();
 ```
 
-### 2. Filament Infolist Entry (View)
+### 2. Filament Table Column
+
+Display HTML with LaTeX rendering in Filament table listings:
+
+```php
+use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex;
+
+// In your table schema
+HtmlWithLatex::make('content')
+    ->label('Problem Content')
+    ->limit(50)
+    ->wrap();
+```
+
+**With all table column options:**
+
+```php
+HtmlWithLatex::make('description')
+    ->label('Description')
+    ->limit(100)
+    ->wrap()
+    ->toggleable()
+    ->searchable()
+### 4. Livewire Component
+```
+
+### 3. Filament Infolist Entry (View)
 
 Display HTML with LaTeX rendering in Filament view pages:
 
@@ -127,7 +153,7 @@ class EditArticle extends Component
 </form>
 ```
 
-### 4. Regular Blade Forms
+### 5. Regular Blade Forms
 
 Use in standard Laravel Blade forms (non-Livewire):
 
@@ -146,7 +172,7 @@ Use in standard Laravel Blade forms (non-Livewire):
 </form>
 ```
 
-### 5. Display HTML with LaTeX (Blade Component)
+### 6. Display HTML with LaTeX (Blade Component)
 
 Render HTML content with LaTeX equations:
 
@@ -195,13 +221,34 @@ Alternative syntax:
 namespace App\Filament\Resources;
 
 use Waterloobae\TinyMce\Forms\Components\TinyEditor;
+use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex as HtmlWithLatexColumn;
 use Waterloobae\TinyMce\Infolists\Components\HtmlWithLatex;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
+use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 
 class ArticleResource extends Resource
 {
+    // Table Schema
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
+                HtmlWithLatexColumn::make('body')
+                    ->label('Content Preview')
+                    ->limit(100)
+                    ->wrap(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+            ]);
+    }
+    
     // Form Schema
     public static function form(Schema $schema): Schema
     {
@@ -349,20 +396,35 @@ The editor automatically detects your application's dark mode:
 - Toolbar: formatting, lists, links, images, code
 - Perfect for: Blog posts, articles, general content
 
-**Full Profile:**
-- Plugins: all features including media, code samples, preview
-- Toolbar: complete formatting options
-- Perfect for: Documentation, complex content
-
-## Updating Your Existing Code
-
-If you're migrating from local components to this package:
-
-### Filament Forms
+### Filament Tables
 
 **Before:**
 ```php
-use App\Filament\Forms\Components\TinyEditor;
+TextColumn::make('content')
+    ->html()
+```
+
+**After:**
+```php
+use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex;
+
+HtmlWithLatex::make('content')
+```
+
+### Filament Infolists
+
+**Before:**
+```php
+TextEntry::make('content')
+    ->view('filament.infolists.components.html-with-latex')
+```
+
+**After:**
+```php
+use Waterloobae\TinyMce\Infolists\Components\HtmlWithLatex;
+
+HtmlWithLatex::make('content')
+``` App\Filament\Forms\Components\TinyEditor;
 ```
 
 **After:**
@@ -400,17 +462,22 @@ HtmlWithLatex::make('content')
 ```
 
 ## Requirements
+## Changelog
 
-- PHP 8.1 or higher
-- Laravel 10.x, 11.x, or 12.x
-- Livewire 3.x
-- Alpine.js (typically included with Livewire)
-- Filament 3.x or 4.x (optional, only if using Filament components)
+### 1.0.1 (2025-10-24)
+- Added `HtmlWithLatex` table column component for Filament tables
+- Improved LaTeX rendering in table views with MathJax support
+- Updated documentation with table column usage examples
 
-## Browser Support
-
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- TinyMCE 6 browser support
+### 1.0.0 (2025-10-23)
+- Initial release
+- TinyMCE 6 integration
+- MathJax 3 support
+- Filament form and infolist components
+- Livewire support
+- Blade components
+- Dark theme support
+- Base64 image handlingport
 - MathJax 3 browser support
 
 ## CDN Resources
