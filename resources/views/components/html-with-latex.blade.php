@@ -1,0 +1,42 @@
+@props(['content'])
+
+<div 
+    {{ $attributes->merge(['class' => 'prose prose-sm dark:prose-invert max-w-none']) }}
+    x-data="{ rendered: false }"
+    x-init="
+        // Wait for MathJax to load and typeset
+        const renderLatex = () => {
+            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise && !rendered) {
+                MathJax.typesetPromise([$el]).then(() => {
+                    rendered = true;
+                }).catch((err) => console.log('MathJax error:', err));
+            } else if (!rendered) {
+                setTimeout(renderLatex, 100);
+            }
+        };
+        renderLatex();
+    "
+>
+    {!! $content !!}
+</div>
+
+@once
+    @push('scripts')
+    {{-- MathJax Configuration --}}
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    {{-- MathJax Library --}}
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    @endpush
+@endonce
