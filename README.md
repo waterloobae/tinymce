@@ -496,7 +496,9 @@ If dark mode isn't working:
 
 ## License
 
-MIT License. See LICENSE file for details.
+This package is licensed under the MIT License. See LICENSE file for details.
+
+**Important Note**: This package integrates with TinyMCE, which is licensed under the **GNU General Public License (GPL) v2+**. When using this package, you are using TinyMCE via CDN, and you must comply with TinyMCE's GPL license terms. For more information about TinyMCE's licensing, visit https://www.tiny.cloud/pricing/ or consider their commercial licensing options if GPL is not suitable for your project.
 
 ## Credits
 
