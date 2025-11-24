@@ -444,7 +444,7 @@ use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex;
 ## CDN Resources
 
 This package uses the following CDN resources:
-- TinyMCE 8.x (latest) from jsdelivr.net
+- TinyMCE 8.0 (latest 8.0.x) from jsdelivr.net
 - MathJax 3 from jsdelivr.net
 
 ## Troubleshooting
