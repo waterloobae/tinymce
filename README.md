@@ -4,7 +4,7 @@ A comprehensive Laravel package providing TinyMCE rich text editor with LaTeX/Ma
 
 ## Features
 
-- 🎨 **TinyMCE 6** rich text editor with dark theme support
+- 🎨 **TinyMCE 8** rich text editor with dark theme support
 - 📐 **MathJax 3** for beautiful LaTeX equation rendering
 - 🖼️ **Base64 image uploads** (no file storage needed)
 - ⚡ **Livewire** compatible with reactive data binding
@@ -444,7 +444,7 @@ use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex;
 ## CDN Resources
 
 This package uses the following CDN resources:
-- TinyMCE 6.8.2 from jsdelivr.net
+- TinyMCE 8 from jsdelivr.net
 - MathJax 3 from jsdelivr.net
 
 ## Troubleshooting
@@ -473,6 +473,11 @@ If dark mode isn't working:
 3. Clear browser cache
 
 ## Changelog
+
+### 2.0.0 (2025-11-24)
+- **BREAKING**: Updated TinyMCE from version 6 to version 8
+- Improved editor performance and features with latest TinyMCE
+- Updated all CDN references to TinyMCE 8
 
 ### 1.0.1 (2025-10-24)
 - Added `HtmlWithLatex` table column component for Filament tables

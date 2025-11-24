@@ -24,7 +24,7 @@
 @once
     @push('scripts')
     {{-- TinyMCE Core --}}
-    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@8/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
         document.addEventListener('alpine:init', () => {
