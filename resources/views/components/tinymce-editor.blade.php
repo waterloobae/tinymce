@@ -75,6 +75,7 @@
                             clearInterval(checkTinyMCE);
 
                             tinymce.init({
+                                license_key: '{{ config('tinymce.api_key', 'no-api-key') }}',
                                 target: this.$refs.editor,
                                 plugins: config.plugins,
                                 toolbar: config.toolbar,

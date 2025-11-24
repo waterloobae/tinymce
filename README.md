@@ -23,7 +23,33 @@ composer require waterloobae/tinymce
 
 The package will auto-register via Laravel's package discovery.
 
-### Optional: Publish Views
+### Configuration
+
+#### TinyMCE API Key (Required)
+
+TinyMCE 8.x requires an API key to function properly. You can obtain a **free API key** from [TinyMCE](https://www.tiny.cloud/auth/signup/):
+
+1. Sign up for a free account at https://www.tiny.cloud/
+2. Get your API key from the dashboard
+3. Add it to your `.env` file:
+
+```env
+TINYMCE_API_KEY=your-api-key-here
+```
+
+**For open-source projects:** TinyMCE provides free API keys. Simply sign up and mention that it's for an open-source project.
+
+#### Optional: Publish Configuration
+
+To customize the configuration:
+
+```bash
+php artisan vendor:publish --tag=tinymce-config
+```
+
+This will publish the config file to `config/tinymce.php`.
+
+#### Optional: Publish Views
 
 If you want to customize the views:
 
@@ -449,6 +475,18 @@ This package uses the following CDN resources:
 
 ## Troubleshooting
 
+### License Key Error
+
+If you see the error "The editor is disabled because a TinyMCE license key has not been provided":
+
+1. Make sure you've added your API key to `.env`:
+   ```env
+   TINYMCE_API_KEY=your-api-key-here
+   ```
+2. Clear your config cache: `php artisan config:clear`
+3. If you published the config, check that `config/tinymce.php` exists
+4. Obtain a free API key from https://www.tiny.cloud/ if you don't have one
+
 ### Editor Not Loading
 
 If the TinyMCE editor doesn't load:
@@ -473,6 +511,12 @@ If dark mode isn't working:
 3. Clear browser cache
 
 ## Changelog
+
+### 2.1.0 (2025-11-24)
+- Added TinyMCE API key configuration support
+- Added `config/tinymce.php` configuration file
+- Updated documentation with API key setup instructions
+- Resolved license key error message issue
 
 ### 2.0.0 (2025-11-24)
 - **BREAKING**: Updated TinyMCE from version 6 to version 8

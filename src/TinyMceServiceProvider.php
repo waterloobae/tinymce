@@ -8,6 +8,11 @@ class TinyMceServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        // Publish configuration
+        $this->publishes([
+            __DIR__.'/../config/tinymce.php' => config_path('tinymce.php'),
+        ], 'tinymce-config');
+
         // Publish views
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/tinymce'),
@@ -25,6 +30,9 @@ class TinyMceServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        //
+        // Merge configuration
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/tinymce.php', 'tinymce'
+        );
     }
 }
