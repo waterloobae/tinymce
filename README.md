@@ -85,8 +85,7 @@ HtmlWithLatex::make('description')
     ->limit(100)
     ->wrap()
     ->toggleable()
-    ->searchable()
-### 4. Livewire Component
+    ->searchable();
 ```
 
 ### 3. Filament Infolist Entry (View)
@@ -112,7 +111,7 @@ TextEntry::make('description')
     ->columnSpanFull();
 ```
 
-### 3. Livewire Component
+### 4. Livewire Component
 
 Use in any Livewire component:
 
@@ -396,72 +395,83 @@ The editor automatically detects your application's dark mode:
 - Toolbar: formatting, lists, links, images, code
 - Perfect for: Blog posts, articles, general content
 
-### Filament Tables
+**Full Profile:**
+- Plugins: all available plugins
+- Toolbar: comprehensive formatting and media tools
+- Perfect for: Documentation, complex articles, technical writing
 
-**Before:**
-```php
-TextColumn::make('content')
-    ->html()
-```
+## Requirements
 
-**After:**
-```php
-use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex;
+- PHP 8.1 or higher
+- Laravel 10.x, 11.x, or 12.x
+- Livewire 3.x
+- Filament 3.x or 4.x (optional, only needed for Filament components)
 
-HtmlWithLatex::make('content')
-```
+## Browser Compatibility
 
-### Filament Infolists
+- Modern browsers with JavaScript enabled
+- MathJax 3 browser support
 
-**Before:**
-```php
-TextEntry::make('content')
-    ->view('filament.infolists.components.html-with-latex')
-```
+## Migration Guide
 
-**After:**
-```php
-use Waterloobae\TinyMce\Infolists\Components\HtmlWithLatex;
+If you're upgrading from a previous version or custom components, ensure you use the correct namespaces:
 
-HtmlWithLatex::make('content')
-``` App\Filament\Forms\Components\TinyEditor;
-```
+### Filament Forms
 
-**After:**
 ```php
 use Waterloobae\TinyMce\Forms\Components\TinyEditor;
 ```
 
 ### Filament Infolists
 
-**Before:**
-```php
-TextEntry::make('cotent')
-    ->view('filament.infolists.components.html-with-latex')
-```
-
-**After:**
 ```php
 use Waterloobae\TinyMce\Infolists\Components\HtmlWithLatex;
+```
 
-HtmlWithLatex::make('content')
+### Filament Tables
+
+```php
+use Waterloobae\TinyMce\Tables\Columns\HtmlWithLatex;
 ```
 
 ### Blade Components
 
-**Before:**
-```blade
-<x-tinymce-editor wire:model="content" />
-<x-html-with-latex :content="$content" />
-```
-
-**After:**
 ```blade
 <x-tinymce::tinymce-editor wire:model="content" />
 <x-tinymce::html-with-latex :content="$content" />
 ```
 
-## Requirements
+## CDN Resources
+
+This package uses the following CDN resources:
+- TinyMCE 6.8.2 from jsdelivr.net
+- MathJax 3 from jsdelivr.net
+
+## Troubleshooting
+
+### Editor Not Loading
+
+If the TinyMCE editor doesn't load:
+1. Check browser console for JavaScript errors
+2. Ensure CDN resources are accessible
+3. Verify Livewire is properly installed for `wire:model`
+4. Clear Laravel view cache: `php artisan view:clear`
+
+### LaTeX Not Rendering
+
+If LaTeX equations aren't rendering:
+1. Check that MathJax CDN is accessible
+2. Verify equations use correct delimiters (`$...$` or `$$...$$`)
+3. Check browser console for MathJax errors
+4. Try refreshing the page to trigger MathJax processing
+
+### Dark Mode Issues
+
+If dark mode isn't working:
+1. Ensure your app provides `dark` class on `<html>` or `<body>` tag
+2. Check that Tailwind dark mode is configured
+3. Clear browser cache
+
 ## Changelog
 
 ### 1.0.1 (2025-10-24)
@@ -477,14 +487,7 @@ HtmlWithLatex::make('content')
 - Livewire support
 - Blade components
 - Dark theme support
-- Base64 image handlingport
-- MathJax 3 browser support
-
-## CDN Resources
-
-This package uses the following CDN resources:
-- TinyMCE 6.8.2 from jsdelivr.net
-- MathJax 3 from jsdelivr.net
+- Base64 image handling
 
 ## License
 
@@ -502,15 +505,3 @@ MIT License. See LICENSE file for details.
 
 For issues, questions, or contributions, please visit:
 https://github.com/waterloobae/tinymce
-
-## Changelog
-
-### 1.0.0 (2025-10-23)
-- Initial release
-- TinyMCE 6 integration
-- MathJax 3 support
-- Filament components
-- Livewire support
-- Blade components
-- Dark theme support
-- Base64 image handling
