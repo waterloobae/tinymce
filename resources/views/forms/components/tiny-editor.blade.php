@@ -49,6 +49,7 @@
 
                             tinymce.init({
                                 target: this.$refs.editor,
+                                license_key: 'gpl',
                                 plugins: config.plugins,
                                 toolbar: config.toolbar,
                                 menubar: false,
