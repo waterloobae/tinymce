@@ -33,6 +33,23 @@ php artisan vendor:publish --tag=tinymce-views
 
 This will publish views to `resources/views/vendor/tinymce/`.
 
+### License Key Configuration
+
+The package automatically includes the GPL license key in TinyMCE initialization. If you experience editor loading issues or license warnings, ensure your `tinymce.init` configuration includes:
+
+```javascript
+tinymce.init({
+    // ... other config
+    license_key: 'gpl',
+    // ... rest of config
+});
+```
+
+This is required when using TinyMCE via CDN with the GPL license.
+
+
+
+
 ## Usage
 
 ### 1. Filament Form Field
