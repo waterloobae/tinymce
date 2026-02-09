@@ -2,20 +2,19 @@
 
 <div 
     {{ $attributes->merge(['class' => 'prose prose-sm dark:prose-invert max-w-none']) }}
-    x-data="{ rendered: false }"
-    x-init="
-        // Wait for MathJax to load and typeset
-        const renderLatex = () => {
-            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise && !rendered) {
+    x-data="{ 
+        rendered: false,
+        renderLatex() {
+            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise && !this.rendered) {
                 MathJax.typesetPromise([$el]).then(() => {
-                    rendered = true;
+                    this.rendered = true;
                 }).catch((err) => console.log('MathJax error:', err));
-            } else if (!rendered) {
-                setTimeout(renderLatex, 100);
+            } else if (!this.rendered) {
+                setTimeout(() => this.renderLatex(), 100);
             }
-        };
-        renderLatex();
-    "
+        }
+    }"
+    x-init="renderLatex()"
 >
     {!! $content !!}
 </div>
