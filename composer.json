@@ -10,6 +10,7 @@
         "mathjax",
         "rich-editor"
     ],
+    "version": "1.3.0",
     "type": "library",
     "license": "MIT",
     "authors": [
